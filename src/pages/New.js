@@ -25,61 +25,54 @@ class New extends Component {
       hashtags: ""
    };
 
-   handleSelectImage = () => {
-      const options = {
-         title: "Select Foto",
-         customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
-         storageOptions: {
-            skipBackup: true,
-            path: "images"
-         }
-      };
-
-      ImagePicker.showImagePicker(options, response => {
-         console.log("Response = ", response);
-
-         if (response.didCancel) {
-            console.log("User cancelled image picker");
-         } else if (response.error) {
-            console.log("ImagePicker Error: ", response.error);
-         } else if (response.customButton) {
-            console.log("User tapped custom button: ", response.customButton);
-         } else {
-            const image = {
-               uri: response.uri,
-               type: "jpeg",
-               name: `${name}.${"jpg"}`
-            };
-
-            // You can also display the image using data:
-            const preview = { uri: "data:image/jpeg;base64," + response.data };
-
-            this.setState({
-               preview: preview,
-               image
-            });
-         }
+   handleSelectImage = async () => {
+      // const options = {
+      //    title: "Select Foto",
+      //    customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
+      //    storageOptions: {
+      //       skipBackup: true,
+      //       path: "images"
+      //    }
+      // };
+      // ImagePicker.showImagePicker(options, response => {
+      //    console.log("Response = ", response);
+      //    if (response.didCancel) {
+      //       console.log("User cancelled image picker");
+      //    } else if (response.error) {
+      //       console.log("ImagePicker Error: ", response.error);
+      //    } else if (response.customButton) {
+      //       console.log("User tapped custom button: ", response.customButton);
+      //    } else {
+      //       const image = {
+      //          uri: response.uri,
+      //          type: "jpeg",
+      //          name: `${name}.${"jpg"}`
+      //       };
+      //       // You can also display the image using data:
+      //       const preview = { uri: "data:image/jpeg;base64," + response.data };
+      //       this.setState({
+      //          preview: preview,
+      //          image
+      //       });
+      //    }
+      // });
+      let result = await ImagePicker.launchImageLibraryAsync({
+         mediaTypes: ImagePicker.MediaTypeOptions.All,
+         allowsEditing: false,
+         aspect: [4, 3]
       });
-
-      //   let result = await ImagePicker.launchImageLibraryAsync({
-      //      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      //      allowsEditing: false,
-      //      aspect: [4, 3]
-      //   });
-
-      //   if (!result.cancelled) {
-      //      const name = Math.random()
-      //         .toString(36)
-      //         .substr(2, 9);
-
-      //      const image = {
-      //         uri: result.uri,
-      //         type: "jpeg",
-      //         name: `${name}.${"jpg"}`
-      //      };
-      //      this.setState({ image });
-      //      console.log(this.state.image);
-      //   }
+      if (!result.cancelled) {
+         const name = Math.random()
+            .toString(36)
+            .substr(2, 9);
+         const image = {
+            uri: result.uri,
+            type: "jpeg",
+            name: `${name}.${"jpg"}`
+         };
+         this.setState({ image });
+         console.log(this.state.image);
+      }
    };
 
    handleSubmit = async e => {

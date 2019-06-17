@@ -7,11 +7,14 @@
       "platforms": ["ios", "android", "web"],
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./src/assets/logo.png",
+      "icon": "./src/assets/icon.png",
       "splash": {
-         "image": "./src/assets/logo.png",
+         "image": "./src/assets/icon.png",
          "resizeMode": "contain",
          "backgroundColor": "#ffffff"
+      },
+      "android": {
+         "package": "com.caverna.isntyou"
       },
       "updates": {
          "fallbackToCacheTimeout": 0
