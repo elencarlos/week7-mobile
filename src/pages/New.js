@@ -8,8 +8,8 @@ import {
 	Image
 } from "react-native";
 import api from "../services/api";
-// import * as ImagePicker from "expo-image-picker";
-import ImagePicker from "react-native-image-picker";
+import * as ImagePicker from "expo-image-picker";
+// import ImagePicker from "react-native-image-picker";
 
 class New extends Component {
 	static navigationOptions = ({ navigation }) => ({
@@ -103,7 +103,7 @@ class New extends Component {
 
 				{this.state.image && (
 					<Image
-						source={{ uri: this.state.image }}
+						source={{ uri: this.state.image.uri }}
 						style={styles.preview}
 					/>
 				)}
